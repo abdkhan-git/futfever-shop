@@ -1,0 +1,386 @@
+Index: api/config/database.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>const path = require('path');\r\n\r\nmodule.exports = ({ env }) => {\r\n  const client = env('DATABASE_CLIENT', 'sqlite');\r\n\r\n  const connections = {\r\n    mysql: {\r\n      connection: {\r\n        connectionString: env('DATABASE_URL'),\r\n        host: env('DATABASE_HOST', 'localhost'),\r\n        port: env.int('DATABASE_PORT', 3306),\r\n        database: env('DATABASE_NAME', 'strapi'),\r\n        user: env('DATABASE_USERNAME', 'strapi'),\r\n        password: env('DATABASE_PASSWORD', 'strapi'),\r\n        ssl: env.bool('DATABASE_SSL', false) && {\r\n          key: env('DATABASE_SSL_KEY', undefined),\r\n          cert: env('DATABASE_SSL_CERT', undefined),\r\n          ca: env('DATABASE_SSL_CA', undefined),\r\n          capath: env('DATABASE_SSL_CAPATH', undefined),\r\n          cipher: env('DATABASE_SSL_CIPHER', undefined),\r\n          rejectUnauthorized: env.bool(\r\n            'DATABASE_SSL_REJECT_UNAUTHORIZED',\r\n            true\r\n          ),\r\n        },\r\n      },\r\n      pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },\r\n    },\r\n    mysql2: {\r\n      connection: {\r\n        host: env('DATABASE_HOST', 'localhost'),\r\n        port: env.int('DATABASE_PORT', 3306),\r\n        database: env('DATABASE_NAME', 'strapi'),\r\n        user: env('DATABASE_USERNAME', 'strapi'),\r\n        password: env('DATABASE_PASSWORD', 'strapi'),\r\n        ssl: env.bool('DATABASE_SSL', false) && {\r\n          key: env('DATABASE_SSL_KEY', undefined),\r\n          cert: env('DATABASE_SSL_CERT', undefined),\r\n          ca: env('DATABASE_SSL_CA', undefined),\r\n          capath: env('DATABASE_SSL_CAPATH', undefined),\r\n          cipher: env('DATABASE_SSL_CIPHER', undefined),\r\n          rejectUnauthorized: env.bool(\r\n            'DATABASE_SSL_REJECT_UNAUTHORIZED',\r\n            true\r\n          ),\r\n        },\r\n      },\r\n      pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },\r\n    },\r\n    postgres: {\r\n      connection: {\r\n        connectionString: env('DATABASE_URL'),\r\n        host: env('DATABASE_HOST', 'localhost'),\r\n        port: env.int('DATABASE_PORT', 5432),\r\n        database: env('DATABASE_NAME', 'strapi'),\r\n        user: env('DATABASE_USERNAME', 'strapi'),\r\n        password: env('DATABASE_PASSWORD', 'strapi'),\r\n        ssl: env.bool('DATABASE_SSL', false) && {\r\n          key: env('DATABASE_SSL_KEY', undefined),\r\n          cert: env('DATABASE_SSL_CERT', undefined),\r\n          ca: env('DATABASE_SSL_CA', undefined),\r\n          capath: env('DATABASE_SSL_CAPATH', undefined),\r\n          cipher: env('DATABASE_SSL_CIPHER', undefined),\r\n          rejectUnauthorized: env.bool(\r\n            'DATABASE_SSL_REJECT_UNAUTHORIZED',\r\n            true\r\n          ),\r\n        },\r\n        schema: env('DATABASE_SCHEMA', 'public'),\r\n      },\r\n      pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },\r\n    },\r\n    sqlite: {\r\n      connection: {\r\n        filename: path.join(\r\n          __dirname,\r\n          '..',\r\n          env('DATABASE_FILENAME', '.tmp/data.db')\r\n        ),\r\n      },\r\n      useNullAsDefault: true,\r\n    },\r\n  };\r\n\r\n  return {\r\n    connection: {\r\n      client,\r\n      ...connections[client],\r\n      acquireConnectionTimeout: env.int('DATABASE_CONNECTION_TIMEOUT', 60000),\r\n    },\r\n  };\r\n};\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/config/database.js b/api/config/database.js
+--- a/api/config/database.js	(revision b31d195901a3372a3d12ea166ed25a9354cd434d)
++++ b/api/config/database.js	(date 1709363512402)
+@@ -1,6 +1,6 @@
+ const path = require('path');
+ 
+-module.exports = ({ env }) => {
++module.exports = ({env}) => {
+   const client = env('DATABASE_CLIENT', 'sqlite');
+ 
+   const connections = {
+@@ -24,7 +24,7 @@
+           ),
+         },
+       },
+-      pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },
++      pool: {min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10)},
+     },
+     mysql2: {
+       connection: {
+@@ -45,7 +45,7 @@
+           ),
+         },
+       },
+-      pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },
++      pool: {min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10)},
+     },
+     postgres: {
+       connection: {
+@@ -68,7 +68,7 @@
+         },
+         schema: env('DATABASE_SCHEMA', 'public'),
+       },
+-      pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },
++      pool: {min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10)},
+     },
+     sqlite: {
+       connection: {
+Index: api/src/api/product/services/product.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>'use strict';\r\n\r\n/**\r\n * product service\r\n */\r\n\r\nconst { createCoreService } = require('@strapi/strapi').factories;\r\n\r\nmodule.exports = createCoreService('api::product.product');\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/src/api/product/services/product.js b/api/src/api/product/services/product.js
+--- a/api/src/api/product/services/product.js	(revision b31d195901a3372a3d12ea166ed25a9354cd434d)
++++ b/api/src/api/product/services/product.js	(date 1709363512468)
+@@ -4,6 +4,6 @@
+  * product service
+  */
+ 
+-const { createCoreService } = require('@strapi/strapi').factories;
++const {createCoreService} = require('@strapi/strapi').factories;
+ 
+ module.exports = createCoreService('api::product.product');
+Index: api/.eslintrc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n  \"parser\": \"babel-eslint\",\r\n  \"extends\": \"eslint:recommended\",\r\n  \"env\": {\r\n    \"commonjs\": true,\r\n    \"es6\": true,\r\n    \"node\": true,\r\n    \"browser\": false\r\n  },\r\n  \"parserOptions\": {\r\n    \"ecmaFeatures\": {\r\n      \"experimentalObjectRestSpread\": true,\r\n      \"jsx\": false\r\n    },\r\n    \"sourceType\": \"module\"\r\n  },\r\n  \"globals\": {\r\n    \"strapi\": true\r\n  },\r\n  \"rules\": {\r\n    \"indent\": [\"error\", 2, { \"SwitchCase\": 1 }],\r\n    \"linebreak-style\": [\"error\", \"unix\"],\r\n    \"no-console\": 0,\r\n    \"quotes\": [\"error\", \"single\"],\r\n    \"semi\": [\"error\", \"always\"]\r\n  }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/.eslintrc b/api/.eslintrc
+--- a/api/.eslintrc	(revision b31d195901a3372a3d12ea166ed25a9354cd434d)
++++ b/api/.eslintrc	(date 1709363512599)
+@@ -18,10 +18,25 @@
+     "strapi": true
+   },
+   "rules": {
+-    "indent": ["error", 2, { "SwitchCase": 1 }],
+-    "linebreak-style": ["error", "unix"],
++    "indent": [
++      "error",
++      2,
++      {
++        "SwitchCase": 1
++      }
++    ],
++    "linebreak-style": [
++      "error",
++      "unix"
++    ],
+     "no-console": 0,
+-    "quotes": ["error", "single"],
+-    "semi": ["error", "always"]
++    "quotes": [
++      "error",
++      "single"
++    ],
++    "semi": [
++      "error",
++      "always"
++    ]
+   }
+ }
+Index: api/config/admin.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>module.exports = ({ env }) => ({\r\n  auth: {\r\n    secret: env('ADMIN_JWT_SECRET'),\r\n  },\r\n  apiToken: {\r\n    salt: env('API_TOKEN_SALT'),\r\n  },\r\n  transfer: {\r\n    token: {\r\n      salt: env('TRANSFER_TOKEN_SALT'),\r\n    },\r\n  },\r\n});\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/config/admin.js b/api/config/admin.js
+--- a/api/config/admin.js	(revision b31d195901a3372a3d12ea166ed25a9354cd434d)
++++ b/api/config/admin.js	(date 1709363512592)
+@@ -1,4 +1,4 @@
+-module.exports = ({ env }) => ({
++module.exports = ({env}) => ({
+   auth: {
+     secret: env('ADMIN_JWT_SECRET'),
+   },
+Index: api/src/api/sub-category/routes/sub-category.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>'use strict';\r\n\r\n/**\r\n * sub-category router\r\n */\r\n\r\nconst { createCoreRouter } = require('@strapi/strapi').factories;\r\n\r\nmodule.exports = createCoreRouter('api::sub-category.sub-category');\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/src/api/sub-category/routes/sub-category.js b/api/src/api/sub-category/routes/sub-category.js
+--- a/api/src/api/sub-category/routes/sub-category.js	(revision b31d195901a3372a3d12ea166ed25a9354cd434d)
++++ b/api/src/api/sub-category/routes/sub-category.js	(date 1709363512728)
+@@ -4,6 +4,6 @@
+  * sub-category router
+  */
+ 
+-const { createCoreRouter } = require('@strapi/strapi').factories;
++const {createCoreRouter} = require('@strapi/strapi').factories;
+ 
+ module.exports = createCoreRouter('api::sub-category.sub-category');
+Index: api/src/api/product/controllers/product.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>'use strict';\r\n\r\n/**\r\n * product controller\r\n */\r\n\r\nconst { createCoreController } = require('@strapi/strapi').factories;\r\n\r\nmodule.exports = createCoreController('api::product.product');\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/src/api/product/controllers/product.js b/api/src/api/product/controllers/product.js
+--- a/api/src/api/product/controllers/product.js	(revision b31d195901a3372a3d12ea166ed25a9354cd434d)
++++ b/api/src/api/product/controllers/product.js	(date 1709363512391)
+@@ -4,6 +4,6 @@
+  * product controller
+  */
+ 
+-const { createCoreController } = require('@strapi/strapi').factories;
++const {createCoreController} = require('@strapi/strapi').factories;
+ 
+ module.exports = createCoreController('api::product.product');
+Index: api/config/server.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>module.exports = ({ env }) => ({\r\n  host: env('HOST', '0.0.0.0'),\r\n  port: env.int('PORT', 1337),\r\n  app: {\r\n    keys: env.array('APP_KEYS'),\r\n  },\r\n  webhooks: {\r\n    populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),\r\n  },\r\n});\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/config/server.js b/api/config/server.js
+--- a/api/config/server.js	(revision b31d195901a3372a3d12ea166ed25a9354cd434d)
++++ b/api/config/server.js	(date 1709363512324)
+@@ -1,4 +1,4 @@
+-module.exports = ({ env }) => ({
++module.exports = ({env}) => ({
+   host: env('HOST', '0.0.0.0'),
+   port: env.int('PORT', 1337),
+   app: {
+Index: api/README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># \uD83D\uDE80 Getting started with Strapi\r\n\r\nStrapi comes with a full featured [Command Line Interface](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html) (CLI) which lets you scaffold and manage your project in seconds.\r\n\r\n### `develop`\r\n\r\nStart your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-develop)\r\n\r\n```\r\nnpm run develop\r\n# or\r\nyarn develop\r\n```\r\n\r\n### `start`\r\n\r\nStart your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-start)\r\n\r\n```\r\nnpm run start\r\n# or\r\nyarn start\r\n```\r\n\r\n### `build`\r\n\r\nBuild your admin panel. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-build)\r\n\r\n```\r\nnpm run build\r\n# or\r\nyarn build\r\n```\r\n\r\n## ⚙\uFE0F Deployment\r\n\r\nStrapi gives you many possible deployment options for your project. Find the one that suits you on the [deployment section of the documentation](https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/deployment.html).\r\n\r\n## \uD83D\uDCDA Learn more\r\n\r\n- [Resource center](https://strapi.io/resource-center) - Strapi resource center.\r\n- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.\r\n- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.\r\n- [Strapi blog](https://docs.strapi.io) - Official Strapi blog containing articles made by the Strapi team and the community.\r\n- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.\r\n\r\nFeel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!\r\n\r\n## ✨ Community\r\n\r\n- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.\r\n- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.\r\n- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.\r\n\r\n---\r\n\r\n<sub>\uD83E\uDD2B Psst! [Strapi is hiring](https://strapi.io/careers).</sub>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/README.md b/api/README.md
+--- a/api/README.md	(revision b31d195901a3372a3d12ea166ed25a9354cd434d)
++++ b/api/README.md	(date 1709363512624)
+@@ -1,10 +1,13 @@
+ # 🚀 Getting started with Strapi
+ 
+-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html) (CLI) which lets you scaffold and manage your project in seconds.
++Strapi comes with a full
++featured [Command Line Interface](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html) (CLI)
++which lets you scaffold and manage your project in seconds.
+ 
+ ### `develop`
+ 
+-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-develop)
++Start your Strapi application with autoReload
++enabled. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-develop)
+ 
+ ```
+ npm run develop
+@@ -14,7 +17,8 @@
+ 
+ ### `start`
+ 
+-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-start)
++Start your Strapi application with autoReload
++disabled. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-start)
+ 
+ ```
+ npm run start
+@@ -24,7 +28,8 @@
+ 
+ ### `build`
+ 
+-Build your admin panel. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-build)
++Build your admin
++panel. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-build)
+ 
+ ```
+ npm run build
+@@ -34,22 +39,27 @@
+ 
+ ## ⚙️ Deployment
+ 
+-Strapi gives you many possible deployment options for your project. Find the one that suits you on the [deployment section of the documentation](https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/deployment.html).
++Strapi gives you many possible deployment options for your project. Find the one that suits you on
++the [deployment section of the documentation](https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/deployment.html).
+ 
+ ## 📚 Learn more
+ 
+ - [Resource center](https://strapi.io/resource-center) - Strapi resource center.
+ - [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
+ - [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
+-- [Strapi blog](https://docs.strapi.io) - Official Strapi blog containing articles made by the Strapi team and the community.
+-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
++- [Strapi blog](https://docs.strapi.io) - Official Strapi blog containing articles made by the Strapi team and the
++  community.
++- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general
++  improvements.
+ 
+-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
++Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions
++are welcome!
+ 
+ ## ✨ Community
+ 
+ - [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
+-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
++- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get
++  feedback or just talk with other Community members.
+ - [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
+ 
+ ---
+Index: api/src/api/sub-category/services/sub-category.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>'use strict';\r\n\r\n/**\r\n * sub-category service\r\n */\r\n\r\nconst { createCoreService } = require('@strapi/strapi').factories;\r\n\r\nmodule.exports = createCoreService('api::sub-category.sub-category');\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/src/api/sub-category/services/sub-category.js b/api/src/api/sub-category/services/sub-category.js
+--- a/api/src/api/sub-category/services/sub-category.js	(revision b31d195901a3372a3d12ea166ed25a9354cd434d)
++++ b/api/src/api/sub-category/services/sub-category.js	(date 1709363512282)
+@@ -4,6 +4,6 @@
+  * sub-category service
+  */
+ 
+-const { createCoreService } = require('@strapi/strapi').factories;
++const {createCoreService} = require('@strapi/strapi').factories;
+ 
+ module.exports = createCoreService('api::sub-category.sub-category');
+Index: api/src/api/sub-category/controllers/sub-category.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>'use strict';\r\n\r\n/**\r\n * sub-category controller\r\n */\r\n\r\nconst { createCoreController } = require('@strapi/strapi').factories;\r\n\r\nmodule.exports = createCoreController('api::sub-category.sub-category');\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/src/api/sub-category/controllers/sub-category.js b/api/src/api/sub-category/controllers/sub-category.js
+--- a/api/src/api/sub-category/controllers/sub-category.js	(revision b31d195901a3372a3d12ea166ed25a9354cd434d)
++++ b/api/src/api/sub-category/controllers/sub-category.js	(date 1709363512448)
+@@ -4,6 +4,6 @@
+  * sub-category controller
+  */
+ 
+-const { createCoreController } = require('@strapi/strapi').factories;
++const {createCoreController} = require('@strapi/strapi').factories;
+ 
+ module.exports = createCoreController('api::sub-category.sub-category');
+Index: api/src/api/category/routes/category.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>'use strict';\r\n\r\n/**\r\n * category router\r\n */\r\n\r\nconst { createCoreRouter } = require('@strapi/strapi').factories;\r\n\r\nmodule.exports = createCoreRouter('api::category.category');\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/src/api/category/routes/category.js b/api/src/api/category/routes/category.js
+--- a/api/src/api/category/routes/category.js	(revision b31d195901a3372a3d12ea166ed25a9354cd434d)
++++ b/api/src/api/category/routes/category.js	(date 1709363512617)
+@@ -4,6 +4,6 @@
+  * category router
+  */
+ 
+-const { createCoreRouter } = require('@strapi/strapi').factories;
++const {createCoreRouter} = require('@strapi/strapi').factories;
+ 
+ module.exports = createCoreRouter('api::category.category');
+Index: api/src/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>'use strict';\r\n\r\nmodule.exports = {\r\n  /**\r\n   * An asynchronous register function that runs before\r\n   * your application is initialized.\r\n   *\r\n   * This gives you an opportunity to extend code.\r\n   */\r\n  register(/*{ strapi }*/) {},\r\n\r\n  /**\r\n   * An asynchronous bootstrap function that runs before\r\n   * your application gets started.\r\n   *\r\n   * This gives you an opportunity to set up your data model,\r\n   * run jobs, or perform some special logic.\r\n   */\r\n  bootstrap(/*{ strapi }*/) {},\r\n};\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/src/index.js b/api/src/index.js
+--- a/api/src/index.js	(revision b31d195901a3372a3d12ea166ed25a9354cd434d)
++++ b/api/src/index.js	(date 1709363512458)
+@@ -7,7 +7,8 @@
+    *
+    * This gives you an opportunity to extend code.
+    */
+-  register(/*{ strapi }*/) {},
++  register(/*{ strapi }*/) {
++  },
+ 
+   /**
+    * An asynchronous bootstrap function that runs before
+@@ -16,5 +17,6 @@
+    * This gives you an opportunity to set up your data model,
+    * run jobs, or perform some special logic.
+    */
+-  bootstrap(/*{ strapi }*/) {},
++  bootstrap(/*{ strapi }*/) {
++  },
+ };
+Index: api/src/api/category/services/category.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>'use strict';\r\n\r\n/**\r\n * category service\r\n */\r\n\r\nconst { createCoreService } = require('@strapi/strapi').factories;\r\n\r\nmodule.exports = createCoreService('api::category.category');\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/src/api/category/services/category.js b/api/src/api/category/services/category.js
+--- a/api/src/api/category/services/category.js	(revision b31d195901a3372a3d12ea166ed25a9354cd434d)
++++ b/api/src/api/category/services/category.js	(date 1709363512633)
+@@ -4,6 +4,6 @@
+  * category service
+  */
+ 
+-const { createCoreService } = require('@strapi/strapi').factories;
++const {createCoreService} = require('@strapi/strapi').factories;
+ 
+ module.exports = createCoreService('api::category.category');
+Index: api/src/api/category/controllers/category.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>'use strict';\r\n\r\n/**\r\n * category controller\r\n */\r\n\r\nconst { createCoreController } = require('@strapi/strapi').factories;\r\n\r\nmodule.exports = createCoreController('api::category.category');\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/src/api/category/controllers/category.js b/api/src/api/category/controllers/category.js
+--- a/api/src/api/category/controllers/category.js	(revision b31d195901a3372a3d12ea166ed25a9354cd434d)
++++ b/api/src/api/category/controllers/category.js	(date 1709363512515)
+@@ -4,6 +4,6 @@
+  * category controller
+  */
+ 
+-const { createCoreController } = require('@strapi/strapi').factories;
++const {createCoreController} = require('@strapi/strapi').factories;
+ 
+ module.exports = createCoreController('api::category.category');
+Index: api/src/api/product/routes/product.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>'use strict';\r\n\r\n/**\r\n * product router\r\n */\r\n\r\nconst { createCoreRouter } = require('@strapi/strapi').factories;\r\n\r\nmodule.exports = createCoreRouter('api::product.product');\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/src/api/product/routes/product.js b/api/src/api/product/routes/product.js
+--- a/api/src/api/product/routes/product.js	(revision b31d195901a3372a3d12ea166ed25a9354cd434d)
++++ b/api/src/api/product/routes/product.js	(date 1709363512438)
+@@ -4,6 +4,6 @@
+  * product router
+  */
+ 
+-const { createCoreRouter } = require('@strapi/strapi').factories;
++const {createCoreRouter} = require('@strapi/strapi').factories;
+ 
+ module.exports = createCoreRouter('api::product.product');
